@@ -13,6 +13,7 @@ function MainPage(params) {
   return (
     <>
       <h1>Main Page</h1>
+      <form id={params.fb-render}></form>
       <Button onClick={handleBuild}>Build Form</Button>
       <QuestionBox></QuestionBox>
     </>
