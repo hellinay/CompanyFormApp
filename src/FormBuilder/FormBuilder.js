@@ -1,35 +1,81 @@
 import $ from "jquery"; //Load jquery
-import React, { Component, createRef } from "react"; //For react component
+import React, { Component, createRef, useState, useRef } from "react"; //For react component
 import ReactDOM from "react-dom";
-import jQuery from 'jquery'
+import jQuery from "jquery";
+import classes from "./FormBuilder.module.css";
+import { useForm } from "react-hook-form";
+import { render } from "@testing-library/react";
+import { useNavigate } from "react-router-dom";
+import FormRender from "./FormRender";
+
 
 window.jQuery = $; //JQuery alias
 window.$ = $; //JQuery alias
 
 require("jquery-ui-sortable"); //For FormBuilder Element Drag and Drop
-require("formBuilder");// For FormBuilder
+require("formBuilder"); // For FormBuilder
 
-//For Load Selected Elements. Not compulsory. If you don't want this. Don't pass formData in below formBuilder initialize.
-const formData = [
-  {
-    type: "header",
-    subtype: "h1",
-    label: "FormBuilder"
+var formData = JSON.stringify([{ type: "text", label: "Input Label" }]);
+var temp;
+var template;
+var xmlObj;
+var submitclicked=false;
+
+
+
+export default function FormBuilder({ setFormInput }) {
+  let navigate = useNavigate();
+
+  function confirmHandler(event) {
+    event.preventDefault();
+    
+    console.log("clicked",xmlObj.formData);
+    submitclicked=true
+    //conso
+    le.log(stringify(temp) + " temp");
+    setFormInput(xmlObj.formData);
+    //navigate("/main", { replace: true });
+    navigate("/main", { formData:xmlObj.formData });
+
   }
-];
 
-document.body.style.margin = "30px"; //For add margin in HTML body
+  const fb = useRef(null);
 
-jQuery(function($) {
-  var formRenderOpts = {
-    formData,
-    dataType: 'JSON'
-  };
-  var $fbTemplate1 = $(document.getElementById("build-wrap-1"));
-  var formData = JSON.stringify([{ type: "text", label: "Input Label" }]);
+  return (
+    <>
+      <form className={classes.form}>
+        <div>
+          <div id="form-builder-template" />
+          <button
+            onClick={confirmHandler}
+            className={classes.btn}
+            type="button"
+            id="getData"
+          >
+            Get Data
+          </button>
+        </div>
+      </form>
+      {submitclicked && <div className="fb-render" id="build-wrap" dangerouslySetInnerHTML={{__html: xmlObj.formData}}></div>}
+      {/* <div class="fb-render">
+        <textarea id="fb-template">
+        </textarea>
+      </div> */}
+    </>
+  );
+}
+
+//Return Initialized formBuilder set it to HTML
+
+
+
+jQuery(function ($) {
+  var $fbTemplate1 = $(document.getElementById("form-builder-template"));
   var formBuilder = $fbTemplate1.formBuilder({ formData });
-  var fbRender = document.getElementById('fb-render'),
-  formData;
+  temp = formBuilder;
+  template = $fbTemplate1;
+
+  // set < code > innerText with escaped markup
   try {
     console.log(formBuilder.formData);
   } catch (err) {
@@ -37,33 +83,22 @@ jQuery(function($) {
     console.error("Error: ", err);
   }
 
-  formBuilder.promise.then(function(fb) {
+  formBuilder.promise.then(function (fb) {
     console.log(fb.formData);
   });
+  var formData ;
 
-  document.getElementById("getData").addEventListener("click", function() {
+  document.getElementById("getData").addEventListener("click", function () {
     console.log(formBuilder.formData);
-    $(fbRender).formRender(formRenderOpts);
-
-  });
-});
-
-//Initialize formBuilder 
-class FormBuilder extends Component {
-
+    var formRenderOpts = {
+      dataType: 'xml',
+      formData: formData
+    };
   
-  fb = createRef();
-
-
-  render() {
-    return <>
-    <div className="btn-wrap"><button type="button" id="getData">Get Data</button></div>
-    <div id="build-wrap-1" ref={this.fb} />
-    </> ;
-  }
-
-
-}
-
-//Return Initialized formBuilder set it to HTML
-export default FormBuilder;
+    console.log(formRenderOpts)
+    var renderedForm = $('<div>');
+    xmlObj=formRenderOpts;
+    renderedForm.formRender(formRenderOpts);
+    
+});
+});
