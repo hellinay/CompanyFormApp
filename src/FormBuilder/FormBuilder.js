@@ -1,12 +1,8 @@
 import $ from "jquery"; //Load jquery
 import React, { Component, createRef, useState, useRef } from "react"; //For react component
-import ReactDOM from "react-dom";
 import jQuery from "jquery";
 import classes from "./FormBuilder.module.css";
-import { useForm } from "react-hook-form";
-import { render } from "@testing-library/react";
 import { useNavigate } from "react-router-dom";
-import FormRender from "./FormRender";
 
 
 window.jQuery = $; //JQuery alias
@@ -17,10 +13,9 @@ require("formBuilder"); // For FormBuilder
 
 var formData = JSON.stringify([{ type: "text", label: "Input Label" }]);
 var temp;
-var template;
 var xmlObj;
 var submitclicked=false;
-
+var template;
 
 
 export default function FormBuilder({ setFormInput }) {
@@ -31,8 +26,7 @@ export default function FormBuilder({ setFormInput }) {
     
     console.log("clicked",xmlObj.formData);
     submitclicked=true
-    //conso
-    le.log(stringify(temp) + " temp");
+    console.log(JSON.stringify(temp) + " temp");
     setFormInput(xmlObj.formData);
     //navigate("/main", { replace: true });
     navigate("/main", { formData:xmlObj.formData });
@@ -89,11 +83,19 @@ jQuery(function ($) {
   var formData ;
 
   document.getElementById("getData").addEventListener("click", function () {
-    console.log(formBuilder.formData);
+    console.log(formBuilder.formData + "jquery data");
     var formRenderOpts = {
       dataType: 'xml',
-      formData: formData
+      formData: formBuilder.formData
     };
+
+    var formData={
+      type:'',
+      label:'',
+      className:'',
+      name:'',
+      subtype:''
+    }
   
     console.log(formRenderOpts)
     var renderedForm = $('<div>');
