@@ -5,6 +5,7 @@ import QuestionBox from "../QuestionForm.js/QuestionBox";
 
 export default function MainPage({ formInput }) {
   let navigate = useNavigate();
+  console.log(formInput + "MAIN");
 
   function handleBuild(params) {
     navigate("/formBuilder", { replace: true });
@@ -18,9 +19,12 @@ export default function MainPage({ formInput }) {
       <Button onClick={handleBuild}>Build Form</Button>
       <div>
         <QuestionBox></QuestionBox>
-
-        <FormRender formInput={formInput}></FormRender>
+         <div
+          className="content"
+          dangerouslySetInnerHTML={{ __html: formInput }}
+        ></div> 
       </div>
+      <FormRender formInput={formInput}></FormRender>
     </>
   );
 }

@@ -1,44 +1,54 @@
-input{
-    display: block;
-    height: 50px;
-    width: 100%;
-    background-color: rgba(255,255,255,0.07);
-    border-radius: 3px;
-    padding: 0 10px;
-    margin-top: 8px;
-    font-size: 14px;
-    font-weight: 300;
-}
-.body{
-    width: 430px;
-    height: 520px;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 50%;
-    background-color: #080710;
-}
-.button-submit{
-    margin-top: 50px;
-    width: 100%;
-    background-color: #ffffff;
-    color: #080710;
-    padding: 15px 0;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:600|Work+Sans:400,500,600,700&display=swap");
+
+body {
+  background: rgb(34, 193, 195);
+  background: linear-gradient(
+    135deg,
+    rgba(34, 193, 195, 1) 0%,
+    rgba(253, 187, 45, 1) 100%
+  );
+  font-family: "work sans";
 }
 
-.button-container {
-  display: flex;
+input {
+  display: block;
+  height: 50px;
+  width: 80%;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 300;
 }
 
-.login-form {
-  background-color: white;
-  padding: 2rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
+.buttonSubmit {
+  display: flex;
+  border-radius: 25px;
+  border-radius: 25px;
+  width: 80%;
+  height: 40px;
+  font-size: 1.3rem;
+  color: white;
+  font-weight: 700;
+  background: rgb(34, 193, 195);
+  background: linear-gradient(
+    90deg,
+    rgba(34, 193, 195, 1) 0%,
+    rgba(253, 187, 45, 1) 100%
+  );
+  border: 0px;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
+  margin: 0 auto;
+  border: none;
+  margin: 0 auto;
+  align-items: center;
+  display: block;
+  
 }
 
 .list-container {
@@ -50,35 +60,53 @@ input{
   font-size: 12px;
 }
 
-.title {
-  font-size: 25px;
-  margin-bottom: 20px;
-}
-
-.input-container {
-  display: flex;
+.inputContainer {
+  display: inline-block;
+  justify-content: space-around;
   flex-direction: column;
-  gap: 8px;
-  margin: 10px;
-}
-form{
-    height: 520px;
-    width: 400px;
-    background-color: rgba(255,255,255,0.13);
-    position: absolute;
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 5px rgba(8,7,16,0.6);
-    padding: 50px 35px;
+  gap: 2px;
+  margin: 20px;
+  margin-left: 20px;
 }
 
-form h3{
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 42px;
-    text-align: center;
+.loginForm {
+  max-width: 400px;
+  min-width: 300px;
+  max-height: 700px;
+  width: 400px;
+  height: 500px;
+  margin: 100px auto;
+  background-color: #ffffff;
+  border-radius: 25px;
+}
+
+form {
+  display: contents;
+  height: 520px;
+  width: 300px;
+  background-color: rgba(221, 38, 38, 0.13);
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 5px rgba(8, 7, 16, 0.6);
+  padding: 50px 35px;
+}
+
+form h3 {
+  text-align: center;
+  font-family: "open sans", sans-serif;
+  padding: 2rem 0;
+  margin: 0;
+  font-size: 2rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  form {
+    display: flex;
+    margin-left: 30%;
+  }
 }
